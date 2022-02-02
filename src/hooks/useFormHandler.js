@@ -1,8 +1,8 @@
 import { useState } from "react";
 import emailRegex from "../utils/emailRegex";
-import inputFields from "../models/inputFields";
+import inputFields from "../types/inputFields";
 
-export const useValidation = () => {
+export const useFormHandler = () => {
   const [inputs, setInputs] = useState(inputFields);
 
   const handleFormChange = (index, e) => {

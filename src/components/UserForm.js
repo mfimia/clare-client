@@ -2,11 +2,11 @@ import { Button, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
-import { useValidation } from "../hooks/useValidation";
+import { useFormHandler } from "../hooks/useFormHandler";
 import AddedUserScreen from "./AddedUserScreen";
 
 const UserForm = () => {
-  const { inputs, handleValidation, handleFormChange } = useValidation();
+  const { inputs, handleValidation, handleFormChange } = useFormHandler();
   const [completed, setCompleted] = useState(false);
   const [refCode, setRefCode] = useState("");
 
@@ -68,6 +68,7 @@ const UserForm = () => {
                   error={input.error.value}
                   helperText={input.error.message}
                   name={input.name}
+                  value={input.value}
                   required={input.name === "referred_by" ? false : true}
                   onChange={(e) => handleFormChange(index, e)}
                   label={input.label}
