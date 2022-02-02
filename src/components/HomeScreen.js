@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const HomeScreen = () => {
   return (
     <Box mt={6} textAlign={"center"} maxWidth={"50%"} mx={"auto"}>
-      <Card sx={{ p: 4 }}>
+      <Card sx={{ p: 4 }} elevation={3}>
         <Typography
           fontFamily={"Roboto Slab"}
           my={2}

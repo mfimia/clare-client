@@ -19,7 +19,11 @@ const EmailsList = () => {
 
   return (
     <Box mt={6} textAlign={"center"} maxWidth={"50%"} mx={"auto"}>
-      <Card sx={{ p: 4, minHeight: "40vh" }}>
+      <Card
+        style={{ overflow: "auto" }}
+        elevation={3}
+        sx={{ p: 4, minHeight: "40vh", maxHeight: "70vh" }}
+      >
         <Typography
           fontFamily={"Roboto Slab"}
           fontWeight={300}

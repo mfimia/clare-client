@@ -23,7 +23,7 @@ const ReferralsList = () => {
 
   return (
     <Box mt={6} textAlign={"center"} maxWidth={"50%"} mx={"auto"}>
-      <Card sx={{ p: 4, minHeight: "40vh" }}>
+      <Card sx={{ p: 4, minHeight: "40vh" }} elevation={3}>
         <Typography
           fontFamily={"Roboto Slab"}
           fontWeight={300}
