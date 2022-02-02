@@ -49,7 +49,7 @@ export const useValidation = () => {
         } else {
           const checkEmail = async () => {
             const response = await fetch(
-              "http://localhost:5000/api/users/auth/email",
+              "http://localhost:5000/api/auth/email",
               {
                 method: "POST",
                 body: JSON.stringify({ email: input.value }),
@@ -86,16 +86,13 @@ export const useValidation = () => {
         // validate referral code
       } else if (input.name === "referred_by" && input.value !== "") {
         const checkCode = async () => {
-          const response = await fetch(
-            "http://localhost:5000/api/users/auth/code",
-            {
-              method: "POST",
-              body: JSON.stringify({ referred_by: input.value }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
+          const response = await fetch("http://localhost:5000/api/auth/code", {
+            method: "POST",
+            body: JSON.stringify({ referred_by: input.value }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
           const data = await response.json();
           if (!data.success) {
             setInputs((prev) =>
