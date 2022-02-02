@@ -1,6 +1,6 @@
 import { useState } from "react";
 import emailRegex from "../utils/emailRegex";
-import inputFields from "../utils/inputFields";
+import inputFields from "../models/inputFields";
 
 export const useValidation = () => {
   const [inputs, setInputs] = useState(inputFields);
