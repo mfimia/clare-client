@@ -13,6 +13,16 @@ export const useFormHandler = () => {
     );
   };
 
+  const handleError = (field, message) => {
+    setInputs((prev) =>
+      prev.map((input) => {
+        return input.name === field
+          ? { ...input, valid: false, error: { value: true, message } }
+          : input;
+      })
+    );
+  };
+
   const handleValidation = () => {
     // clean errors and valid fields from previous submit
     setInputs((prev) =>
@@ -47,76 +57,12 @@ export const useFormHandler = () => {
             )
           );
         } else {
-          const checkEmail = async () => {
-            const response = await fetch(
-              "http://localhost:5000/api/auth/email",
-              {
-                method: "POST",
-                body: JSON.stringify({ email: input.value }),
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }
-            );
-            const data = await response.json();
-            if (!data.success) {
-              setInputs((prev) =>
-                prev.map((inp) =>
-                  inp.name === "email"
-                    ? {
-                        ...inp,
-                        error: {
-                          value: true,
-                          message: "Email already in use",
-                        },
-                      }
-                    : inp
-                )
-              );
-            } else {
-              setInputs((prev) =>
-                prev.map((inp) =>
-                  inp.name === "email" ? { ...inp, valid: true } : inp
-                )
-              );
-            }
-          };
-          checkEmail();
+          setInputs((prev) =>
+            prev.map((inp) =>
+              inp.name === "email" ? { ...inp, valid: true } : inp
+            )
+          );
         }
-        // validate referral code
-      } else if (input.name === "referred_by" && input.value !== "") {
-        const checkCode = async () => {
-          const response = await fetch("http://localhost:5000/api/auth/code", {
-            method: "POST",
-            body: JSON.stringify({ referred_by: input.value }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          const data = await response.json();
-          if (!data.success) {
-            setInputs((prev) =>
-              prev.map((inp) =>
-                inp.name === "referred_by"
-                  ? {
-                      ...inp,
-                      error: {
-                        value: true,
-                        message: "Please enter a valid code",
-                      },
-                    }
-                  : inp
-              )
-            );
-          } else {
-            setInputs((prev) =>
-              prev.map((inp) =>
-                inp.name === "referred_by" ? { ...inp, valid: true } : inp
-              )
-            );
-          }
-        };
-        checkCode();
       } else {
         // if no errors, input becomes valid
         setInputs((prev) =>
@@ -130,5 +76,6 @@ export const useFormHandler = () => {
     inputs,
     handleValidation,
     handleFormChange,
+    handleError,
   };
 };

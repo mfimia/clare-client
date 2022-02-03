@@ -6,7 +6,8 @@ import { useFormHandler } from "../hooks/useFormHandler";
 import AddedUserScreen from "./AddedUserScreen";
 
 const UserForm = () => {
-  const { inputs, handleValidation, handleFormChange } = useFormHandler();
+  const { inputs, handleValidation, handleFormChange, handleError } =
+    useFormHandler();
   const [completed, setCompleted] = useState(false);
   const [refCode, setRefCode] = useState("");
 
@@ -36,14 +37,21 @@ const UserForm = () => {
             "Content-Type": "application/json",
           },
         });
+
         const data = await res.json();
 
-        // storing referral code
-        setRefCode(data.referral_code);
-        setCompleted(true);
+        // if response status is not 200, we display errors
+        if (res.status !== 200) {
+          data.forEach((i) => handleError(i.field, i.message));
+        } else {
+          // storing referral code
+          setRefCode(data.referral_code);
+          setCompleted(true);
+        }
       };
       registerUser();
     }
+    // eslint-disable-next-line
   }, [inputs]);
 
   return (
