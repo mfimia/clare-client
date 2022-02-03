@@ -13,6 +13,7 @@ export const useFormHandler = () => {
     );
   };
 
+  // receives error and updates input
   const handleError = (field, message) => {
     setInputs((prev) =>
       prev.map((input) => {
@@ -56,6 +57,7 @@ export const useFormHandler = () => {
                 : inp
             )
           );
+          // if email format is correct, becomes valid
         } else {
           setInputs((prev) =>
             prev.map((inp) =>
